@@ -8,11 +8,11 @@ Please make sure to bring a laptop with you to the workshop and complete the fol
 
 Download and install the latest versions of R, RStudio, and Quarto:
 
--   R 4.2.3 or above: https://cran.r-project.org
+-   R 4.2.3 or above: <https://cran.r-project.org>
 
--   RStudio 2023.09.1+494 or above: https://posit.co/download/rstudio-desktop
+-   RStudio 2023.09.1+494 or above: <https://posit.co/download/rstudio-desktop>
 
--   Quarto 1.3.450: https://quarto.org/docs/get-started
+-   Quarto 1.3.450: <https://quarto.org/docs/get-started>
 
 ## R Packages 
 
