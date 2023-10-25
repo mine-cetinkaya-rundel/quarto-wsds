@@ -5,3 +5,5 @@
 
 /.quarto/
 admin/*
+*.key
+_site/*
