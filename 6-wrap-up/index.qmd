@@ -1,0 +1,15 @@
+---
+title: "Wrap-up"
+---
+
+## Slides
+
+[View slides in full screen](6-wrap-up.html)
+
+```{=html}
+<iframe class="slide-deck" src="6-wrap-up.html" height="420" width="747" style="border: 1px solid #581B39;"></iframe>
+```
+
+## Exercises
+
+There are no exercises in this module.

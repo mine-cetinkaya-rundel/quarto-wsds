@@ -1,0 +1,14 @@
+---
+title: "Articles"
+---
+
+## Slides
+
+[View slides in full screen](5-articles.html)
+
+```{=html}
+<iframe class="slide-deck" src="5-articles.html" height="420" width="747" style="border: 1px solid #581B39;"></iframe>
+```
+## Exercises
+
+There are no starter files for the exercises in this module. You'll create the files as part of the exercises.

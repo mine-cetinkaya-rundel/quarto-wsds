@@ -1,0 +1,85 @@
+---
+title: "Wrap-up"
+subtitle: "Hello Quarto - A World of Possibilities<br>(for Reproducible Publishing)"
+footer: "[mine.quarto.pub/quarto-wsds](https://mine.quarto.pub/quarto-wsds)"
+format:
+  revealjs:
+    author: "Mine Çetinkaya Rundel"
+    institute: "Duke University + Posit"
+    transition: fade
+    slide-number: true
+    chalkboard: false
+    logo: "../images/logo.png"
+    theme: ../style/slides.scss
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# set width of code output
+options(width = 65)
+
+# load background packages
+library(countdown)
+```
+
+# Parting remarks
+
+## Quarto CLI...
+
+orchestrates each step of rendering
+
+![Artwork from "Hello, Quarto" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst.](images/horst_qmd_render_schema.png){fig-alt="A schematic representing rendering of Quarto documents from .qmd, to knitr or jupyter, to plain text markdown, then converted by pandoc into any number of output types including html, PDF, or Word document."}
+
+## Learn more
+
+::: learn-more
+[https://quarto.org](https://quarto.org/)
+
+```{=html}
+<iframe src="https://quarto.org/" width="100%" height="550" title="Quarto Website"></iframe>
+```
+:::
+
+## Follow up with...
+
+::: learn-more
+[quarto.org/docs/blog](https://quarto.org/docs/blog)
+
+```{=html}
+<iframe src="https://quarto.org/docs/blog/" width="100%" height="550" title="Quarto Website"></iframe>
+```
+:::
+
+# Troubleshooting
+
+## Creating a minimum reproducible example
+
+-   For any coding question, start by creating a minimum reproducible example (reprex)
+
+-   You'll find that this task is less than trivial for a complex Quarto project
+
+-   But there's a good chance you'll solve your problem while creating the reprex
+
+## Getting help
+
+-   Review the FAQ: <https://quarto.org/docs/faq>
+
+-   Have a question, post on GitHub Discussion: <https://github.com/quarto-dev/quarto-cli/discussions>
+
+-   Found (or think you found) a bug or have a feature request, open an issue: <https://github.com/quarto-dev/quarto-cli/issues>
+
+# Fin
+
+## Thank you! {background-image="images/thank-you.png"}
+
+🐘 [https://fosstodon.org/\@minecr](https://fosstodon.org/@minecr)
+
+🐦 [\@minebocek](https://twitter.com/minebocek)
+
+## Questions
+
+::: task
+Any questions / anything you'd like to review or learn before we wrap up the workshop?
+:::

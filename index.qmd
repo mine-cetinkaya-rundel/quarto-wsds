@@ -1,0 +1,42 @@
+---
+title: "Hello Quarto - A World of Possibilities (for Reproducible Publishing)"
+subtitle: "Short Course at WSDS 2023"
+format:
+  html:
+    toc: false
+---
+
+> 8:00 am - 12:00 pm\
+> Wednesday, October 24, 2023\
+> Bellevue, WA
+
+Quarto is the next generation of R Markdown for publishing, including dynamic and static documents and multilingual programming language support. With Quarto you can create documents, books, presentations, blogs or other online resources. This workshop will introduce you to authoring Quarto documents using RStudio Visual Editor, which provides a user interface for editing all of Pandoc markdown. You will also get learn to create slides and develop websites and publish to QuartoPub as well as writing scientific manuscripts with Quarto.
+
+## Schedule
+
+| Time           | Module                           |
+|----------------|----------------------------------|
+| 08:00 - 08:55  | [Hello Quarto](1-hello-quarto/)  |
+| 08:55 - 09:00  | 5 min break                      |
+| 09:00 - 09:55  | [Documents](2-documents/)        |
+| 09:55 - 10:00  | 5 min break                      |
+| 10:00 - 10:45  | [Presentations](3-presentations/)|
+| 10:45 - 11:00  | 15 min break                     |
+| 11:00 - 11:40  | [Websites](4-websites/)          |
+| 11:40 - 11:50  | [Articles](6-articles/)          |
+| 11:50 - 12:00  | [Wrap-up and Q&A](7-wrap-up/)    |
+
+: {tbl-colwidths="\[25,35\]"}
+
+## Instructor
+
+Mine Çetinkaya-Rundel is Professor of the Practice at Duke University and Developer Educator at RStudio. Mine’s work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM. Mine is a Fellow of the ASA and Elected Member of the ISI as well as the winner of the 2021 Robert V. Hogg Award for For Excellence in
+Teaching Introductory Statistics.
+
+## Acknowledgements
+
+The materials for this workshop were authored by Mine Çetinkaya-Rundel and Andrew Bray. 
+
+## License
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

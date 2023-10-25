@@ -1,2 +1,3 @@
-# quarto-wsds
-Materials for the Hello Quarto: A World of Possibilities (for Reproducible Publishing) workshop at WSDS 2023
+# Hello Quarto - A World of Possibilities (for Reproducible Publishing)
+
+Quarto is the next generation of R Markdown for publishing, including dynamic and static documents and multilingual programming language support. With Quarto you can create documents, books, presentations, blogs or other online resources. This workshop will introduce you to authoring Quarto documents using RStudio Visual Editor, which provides a user interface for editing all of Pandoc markdown. You will also get learn to create slides and develop websites and publish to QuartoPub as well as writing scientific manuscripts with Quarto.

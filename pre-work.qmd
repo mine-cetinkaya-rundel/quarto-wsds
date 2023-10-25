@@ -1,0 +1,38 @@
+---
+title: "Pre-workshop instructions"
+---
+
+Please make sure to bring a laptop with you to the workshop and complete the following steps:
+
+## Software
+
+Download and install the latest versions of R, RStudio, and Quarto:
+
+-   R 4.2.3 or above: https://cran.r-project.org
+
+-   RStudio 2023.09.1+494 or above: https://posit.co/download/rstudio-desktop
+
+-   Quarto 1.3.450: https://quarto.org/docs/get-started
+
+## R Packages 
+
+Install the following packages:
+
+```{r}
+#| eval: false
+
+pkg_list <- c("tidyverse", "gt", "ggthemes", "palmerpenguins", "quarto", "here", "usethis")
+install.packages(pkg_list)
+```
+
+## Exercises
+
+Download and open the exercises for this session. The easiest way is to run this line of R code at the console in RStudio.
+
+```{r}
+#| eval: false
+
+usethis::use_course("https://bit.ly/wsds-exercises")
+```
+
+If that doesn't work, you can download a zip file of the exercises [here](https://github.com/mine-cetinkaya-rundel/quarto-wsds-exercises), then open the directory. The qmd files can be opened in RStudio.

@@ -1,0 +1,1230 @@
+---
+title: "Documents"
+subtitle: "Hello Quarto - A World of Possibilities<br>(for Reproducible Publishing)"
+footer: "[mine.quarto.pub/quarto-wsds](https://mine.quarto.pub/quarto-wsds)"
+format:
+  revealjs:
+    author: "Mine Çetinkaya Rundel"
+    institute: "Duke University + Posit"
+    transition: fade
+    slide-number: true
+    chalkboard: false
+    logo: "../images/logo.png"
+    theme: ../style/slides.scss
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# set width of code output
+options(width = 65)
+
+# load background packages
+library(countdown)
+library(gt)
+```
+
+## 
+
+::: task
+Where does the name "Quarto" come from?
+:::
+
+. . .
+
+```{=html}
+<iframe src="https://en.wikipedia.org/wiki/Quarto" title = "Quarto on Wikipedia" frameborder="1" height="400" width="900"></iframe>
+```
+::: aside
+Source: <https://en.wikipedia.org/wiki/Quarto>
+:::
+
+# Anatomy of a Quarto document
+
+## Components
+
+1.  Metadata: YAML
+
+2.  Text: Markdown
+
+3.  Code: Executed via `knitr` or `jupyter`
+
+. . .
+
+**Weave it all together**, and you have beautiful, powerful, and useful outputs!
+
+## Literate programming {.smaller}
+
+Literate programming is writing out the program logic in a human language with included code snippets (separated by a primitive markup) and macros.
+
+````         
+---
+title: "ggplot2 demo"
+date: "5/19/2023"
+format: html
+---
+
+## MPG
+
+There is a relationship between city and highway mileage.
+
+```{{r}}
+#| label: fig-mpg
+
+library(ggplot2)
+
+ggplot(mpg, aes(x = cty, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(method = "loess")
+```
+````
+
+::: aside
+Source: <https://en.wikipedia.org/wiki/Literate_programming>
+:::
+
+# Metadata
+
+## YAML
+
+"Yet Another Markup Language" or "YAML Ain't Markup Language" is used to provide document level metadata ...
+
+. . .
+
+... in key-value pairs,
+
+. . .
+
+... that can nest,
+
+. . .
+
+... are fussy about indentation,
+
+. . .
+
+... and are kept between `---`.
+
+``` yaml
+---
+key: value
+---
+```
+
+## Example: Output options
+
+``` yaml
+---
+format: something
+---
+```
+
+. . .
+
+<br>
+
+``` yaml
+---
+format: html
+---
+```
+
+``` yaml
+---
+format: pdf
+---
+```
+
+``` yaml
+---
+format: revealjs
+---
+```
+
+## Example: Indented nesting
+
+Indentation matters!
+
+``` yaml
+---
+format: 
+  html:
+    toc: true
+    code-fold: true
+---
+```
+
+## Fussing with YAML (invalid) {.smaller}
+
+-   Invalid: No space after `:`
+
+``` yaml
+---
+format:html
+---
+```
+
+-   Invalid: Read as missing
+
+``` yaml
+---
+format:
+html
+---
+```
+
+-   Valid, but needs next object
+
+``` yaml
+---
+format: 
+  html:
+---
+```
+
+## Fussing with YAML (valid) {.smaller}
+
+There are multiple ways of formatting valid YAML:
+
+-   Valid: There's a space after `:`
+
+``` yaml
+format: html
+```
+
+-   Valid: There are 2 spaces a new line and no trailing `:`
+
+``` yaml
+format:
+  html
+```
+
+-   Valid: `format: html` with additional options made with proper indentation
+
+``` yaml
+format: 
+  html:
+    toc: true
+```
+
+## Why YAML?
+
+To avoid manually typing out all the options, every time when rendering via the CLI:
+
+. . .
+
+``` bash
+quarto render document.qmd --to html
+```
+
+<br>
+
+. . .
+
+``` bash
+quarto render document.qmd --to html -M code-fold:true
+```
+
+## Quarto YAML Intelligence
+
+RStudio + VSCode provide rich tab-completion - start a word and tab to complete, or <kbd>`Ctrl + space`</kbd> to see all available options.
+
+<br>
+
+![](images/quarto-tab-complete.png){fig-align="center" width="500"}
+
+## List of valid YAML fields
+
+-   Many YAML fields are common across various outputs
+
+-   But also each output type has its own set of valid YAML fields and options
+
+-   Definitive list: [quarto.org/docs/reference/formats/html](https://quarto.org/docs/reference/formats/html.html)
+
+## Your turn
+
+::: task
+-   Open `hello-penguins.qmd` in RStudio.
+-   Try <kbd>`Ctrl + space`</kbd> to see the available YAML options.
+-   Try out the tab-completion of any options that sound interesting.
+-   You can use the [HTML reference](https://quarto.org/docs/reference/formats/html.html) as needed.
+:::
+
+```{r}
+#| echo: false
+
+countdown(minutes = 3)
+```
+
+# Text
+
+## Text Formatting
+
++-------------------------------+-------------------------------+
+| Markdown Syntax               | Output                        |
++===============================+===============================+
+| ```                           | *italics* and **bold**        |
+| *italics* and **bold**        |                               |
+| ```                           |                               |
++-------------------------------+-------------------------------+
+| ```                           | superscript^2^ / subscript~2~ |
+| superscript^2^ / subscript~2~ |                               |
+| ```                           |                               |
++-------------------------------+-------------------------------+
+| ```                           | ~~strikethrough~~             |
+| ~~strikethrough~~             |                               |
+| ```                           |                               |
++-------------------------------+-------------------------------+
+| ```                           | `verbatim code`               |
+| `verbatim code`               |                               |
+| ```                           |                               |
++-------------------------------+-------------------------------+
+
+: {tbl-colwidths="\[50,50\]"}
+
+## Headings {.smaller}
+
++-----------------+-----------------+
+| Markdown Syntax | Output          |
++=================+=================+
+| ```             | # Header 1      |
+| # Header 1      |                 |
+| ```             |                 |
++-----------------+-----------------+
+| ```             | ## Header 2     |
+| ## Header 2     |                 |
+| ```             |                 |
++-----------------+-----------------+
+| ```             | ### Header 3    |
+| ### Header 3    |                 |
+| ```             |                 |
++-----------------+-----------------+
+| ```             | #### Header 4   |
+| #### Header 4   |                 |
+| ```             |                 |
++-----------------+-----------------+
+| ```             | ##### Header 5  |
+| ##### Header 5  |                 |
+| ```             |                 |
++-----------------+-----------------+
+| ```             | ###### Header 6 |
+| ###### Header 6 |                 |
+| ```             |                 |
++-----------------+-----------------+
+
+: {tbl-colwidths="\[50,50\]"}
+
+## Links {.smaller}
+
+There are several types of "links" or hyperlinks.
+
+::: columns
+::: {.column width="60%"}
+**Markdown**
+
+``` markdown
+You can embed [named hyperlinks](https://quarto.org/),
+direct urls like <https://quarto.org/>, and links to 
+[other places](#quarto-anatomy) in 
+the document. The syntax is similar for embedding an
+inline image: ![Penguins playing with ball](images/penguins-quarto-ball.png).
+```
+:::
+
+::: {.column .fragment width="40%"}
+**Output**
+
+You can embed [named hyperlinks](https://quarto.org/), direct urls like <https://quarto.org/>, and links to [other places](#quarto-anatomy) in the document. The syntax is similar for embedding an inline image: ![Penguins playing with ball](images/penguins-quarto-ball.png){style="width:250px;"}.
+:::
+:::
+
+## Markdown figures
+
+```         
+![Penguins playing with a Quarto ball](images/penguins-quarto-ball.png)
+```
+
+![Penguins playing with a Quarto ball](images/penguins-quarto-ball.png)
+
+## Markdown figures with options
+
+::: columns
+::: {.column width="50%"}
+```         
+![](images/penguins-quarto-ball.png){fig-align="left" width=250}
+```
+
+![](images/penguins-quarto-ball.png){fig-align="left" width="250"}
+:::
+
+::: {.column width="50%"}
+```         
+![](images/penguins-quarto-ball.png){fig-align="right" width=250 fig-alt="Illustration of two penguins playing with a Quarto ball."}
+```
+
+![](images/penguins-quarto-ball.png){fig-align="right" width="250" fig-alt="Illustration of two penguins playing with a Quarto ball."}
+:::
+:::
+
+## Lists {.smaller}
+
+Unordered list:
+
+::: columns
+::: {.column width="50%"}
+**Markdown:**
+
+``` markdown
+-   unordered list         
+    -   sub-item 1         
+    -   sub-item 1         
+        -   sub-sub-item 1 
+```
+:::
+
+::: {.column .fragment width="50%" fragment-index="1"}
+**Output**
+
+-   unordered list
+    -   sub-item 1\
+    -   sub-item 1
+        -   sub-sub-item 1
+:::
+:::
+
+Ordered list:
+
+::: columns
+::: {.column width="50%"}
+**Markdown:**
+
+``` markdown
+1. ordered list            
+2. item 2                  
+   i. sub-item 1          
+      A.  sub-sub-item 1
+```
+:::
+
+::: {.column .fragment width="50%" fragment-index="2"}
+**Output**
+
+1.  ordered list\
+2.  item 2
+    i.  sub-item 1
+        A.  sub-sub-item 1
+:::
+:::
+
+## Quotes
+
+**Markdown:**
+
+``` markdown
+> Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do. 
+> - Donald Knuth, Literate Programming
+```
+
+. . .
+
+**Output:**
+
+> Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do. - Donald Knuth, Literate Programming
+
+::: aside
+"Literate Programming", The Computer Journal 27 (1984), p. 97. (Reprinted in Literate Programming, 1992, p. 99.) Literate Programming (1984)
+:::
+
+## Your turn
+
+::: task
+-   Open `markdown-syntax.qmd` in RStudio.
+-   Follow the instructions in the document for how to modify it.
+:::
+
+```{r}
+#| echo: false
+
+countdown(minutes = 5)
+```
+
+# Tables
+
+## Markdown tables
+
+**Markdown:**
+
+``` markdown
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+```
+
+. . .
+
+**Output:**
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|    12 | 12   | 12      |   12   |
+|   123 | 123  | 123     |  123   |
+|     1 | 1    | 1       |   1    |
+
+## Grid tables
+
+**Markdown:**
+
+``` markdown
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+
+: Sample grid table.
+```
+
+## Grid tables
+
+**Output:**
+
++---------------+---------------+----------------------+
+| Fruit         | Price         | Advantages           |
++===============+===============+======================+
+| Bananas       | \$1.34        | -   built-in wrapper |
+|               |               | -   bright color     |
++---------------+---------------+----------------------+
+| Oranges       | \$2.10        | -   cures scurvy     |
+|               |               | -   tasty            |
++---------------+---------------+----------------------+
+
+: Sample grid table.
+
+## Grid tables: Alignment
+
+-   Alignments can be specified as with pipe tables, by putting colons at the boundaries of the separator line after the header:
+
+```         
++---------------+---------------+--------------------+
+| Right         | Left          | Centered           |
++==============:+:==============+:==================:+
+| Bananas       | $1.34         | built-in wrapper   |
++---------------+---------------+--------------------+
+```
+
+. . .
+
+-   For headerless tables, the colons go on the top line instead:
+
+```         
++--------------:+:--------------+:------------------:+
+| Right         | Left          | Centered           |
++---------------+---------------+--------------------+
+```
+
+## Grid tables: Authoring
+
+-   Note that grid tables are quite awkward to write with a plain text editor because unlike pipe tables, the column indicators must align.
+
+-   The Visual Editor can assist in making these tables!
+
+## Tables from code {.smaller}
+
+The **knitr** package can turn data frames into tables with `knitr::kable()`:
+
+```{r}
+library(knitr)
+library(palmerpenguins)
+
+head(penguins) |> 
+  kable()
+```
+
+## Tables from code {.smaller}
+
+If you want fancier tables, try the **gt** package and [all that it offers](https://gt.rstudio.com/)!
+
+```{r}
+#| output-location: column-fragment
+
+library(gt)
+
+head(penguins) |> 
+  gt() |>
+  tab_style(
+    style = list(
+      cell_fill(color = "pink"),
+      cell_text(style = "italic")
+      ),
+    locations = cells_body(
+      columns = bill_length_mm,
+      rows = bill_length_mm > 40
+    )
+  )
+```
+
+# Cross references
+
+## Cross references
+
+-   Help readers to navigate your document with numbered references and hyperlinks to entities like figures and tables.
+
+-   Cross referencing steps:
+
+    -   Add a caption to your figure or table.
+    -   Give an id to your figure or table, starting with `fig-` or `tbl-`.
+    -   Refer to it with `@fig-...` or `@tbl-...`.
+
+## Figure cross references {.smaller}
+
+The presence of the caption (`Blue penguin`) and label (`#fig-blue-penguin`) make this figure referenceable:
+
+::: columns
+::: {.column width="50%"}
+**Markdown:**
+
+``` markdown
+See @fig-blue-penguin for a cute blue penguin.
+![Blue penguin](images/blue-penguin.png){#fig-blue-penguin}
+```
+:::
+
+::: {.column width="50%"}
+**Output:**
+
+See @fig-blue-penguin for a cute blue penguin.
+
+![Blue Penguin](images/blue-penguin.png){#fig-blue-penguin fig-alt="A blue penguin" width="200"}
+:::
+:::
+
+## Table cross references (from code) {.smaller}
+
+The presence of the caption (`A few penguins`) and label (`#tbl-penguins`) make this table referenceable:
+
+::: columns
+::: {.column width="50%"}
+**Markdown:**
+
+```` markdown
+See @tbl-penguins for data on a few penguins.
+
+```{{r}}
+#| label: tbl-penguins
+#| tbl-cap: A few penguins
+
+head(penguins) |> 
+  gt()
+```
+````
+:::
+
+::: {.column width="50%"}
+**Output:**
+
+See @tbl-penguins for data on a few penguins.
+
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: A few penguins
+
+head(penguins) |> 
+  gt()
+```
+:::
+:::
+
+## Table cross references (from markdown) {.smaller}
+
+The presence of the caption (`A few penguins`) and label (`#tbl-penguins`) make this table referenceable:
+
+::: columns
+::: {.column width="50%"}
+**Markdown:**
+
+``` markdown
+See @tbl-numbers for data on a few penguins.
+
+| Right | Left |
+|------:|:-----|
+|   12  |  12  |
+|  123  |  123 |
+
+: An array of numbers {#tbl-numbers}
+```
+:::
+
+::: {.column width="50%"}
+**Output:**
+
+See @tbl-numbers for data on a few penguins.
+
+| Right | Left |
+|------:|:-----|
+|    12 | 12   |
+|   123 | 123  |
+
+: An array of numbers {#tbl-numbers}
+:::
+:::
+
+## Your turn
+
+::: task
+-   Open `tables-figures.qmd`.
+-   Follow the instructions in the document.
+-   Exchange one new thing you've learned with your neighbor.
+:::
+
+```{r}
+#| echo: false
+
+countdown(minutes = 5)
+```
+
+# Quarto Elements
+
+## What you're about to see...
+
+Extends the type of elements you can add to a document and works across the main output formats (html, pdf, docx, pptx):
+
+- Fenced divs
+- Bracketed spans
+
+## The Bracketed Span {transition="none"}
+
+## The Bracketed Span {transition="none"}
+
+![](images/quarto-workshop-07.jpg){fig-align="center"}
+
+## The Bracketed Span {transition="none"}
+
+![](images/quarto-workshop-08.jpg){fig-align="center"}
+
+## The Bracketed Span {transition="none"}
+
+![](images/quarto-workshop-09.jpg){fig-align="center"}
+
+## The Bracketed Span {transition="none"}
+
+![](images/quarto-workshop-10.jpg){fig-align="center"}
+
+## The Bracketed Span {transition="none"}
+
+![](images/quarto-workshop-11.jpg){fig-align="center"}
+
+## The Fenced Div {transition="none"}
+
+![](images/quarto-workshop-12.jpg){fig-align="center"}
+
+## Example: Callout Blocks {auto-animate="true"}
+
+Use case: highlight content for the reader in multiple formats.
+
+::: columns
+::: {.column .fragment width="50%"}
+#### Markdown
+
+``` markdown
+:::{.callout-note}
+Look - a squirrel!
+:::
+
+:::{.callout-important}
+Look - a squirrel!
+:::
+
+:::{.callout-tip}
+Look - a squirrel!
+:::
+```
+:::
+
+::: {.column .fragment width="50%"}
+#### HTML output
+
+::: callout-note
+Look - a squirrel!
+:::
+
+::: callout-important
+Look - a squirrel!
+:::
+
+::: callout-tip
+Look - a squirrel!
+:::
+:::
+:::
+
+## Callout Blocks {auto-animate="true"}
+
+Highlight content for the reader in multiple formats.
+
+::: columns
+::: {.column width="50%"}
+#### Markdown
+
+``` markdown
+:::{.callout-note}
+Look - a squirrel!
+:::
+
+:::{.callout-important}
+Look - a squirrel!
+:::
+
+:::{.callout-tip}
+Look - a squirrel!
+:::
+```
+:::
+
+::: {.column width="50%"}
+#### pdf output
+
+![](images/callouts-pdf.png)
+:::
+:::
+
+## Callout Blocks {auto-animate="true"}
+
+Highlight content for the reader in multiple formats.
+
+::: columns
+::: {.column width="50%"}
+#### Markdown
+
+``` markdown
+:::{.callout-note}
+Look - a squirrel!
+:::
+
+:::{.callout-important}
+Look - a squirrel!
+:::
+
+:::{.callout-tip}
+Look - a squirrel!
+:::
+```
+:::
+
+::: {.column width="50%"}
+#### docx output
+
+![](images/callouts-doc.png)
+:::
+
+\
+\
+:::
+
+## Your turn
+
+::: task
+-   Open `callout-boxes.qmd` and render the document.
+-   Change the type of the first callout box and then re-render. Also try adding attributes inside `{ }` to learn what they do.
+    -   `icon=true` or `icon=false`.
+    -   `appearance="simple"` (can also try `"minimal"` and `"default"`).
+-   Make the second callout box collapsible.
+-   Change the format to PDF and re-render.
+:::
+
+```{r}
+#| echo: false
+
+countdown(minutes = 5)
+```
+
+# Code
+
+## R Markdown's Code Chunk
+
+```{r, echo=FALSE}
+#| echo: fenced
+
+rnorm(3)
+```
+
+. . .
+
+::: task
+What syntax is being used in `echo=FALSE`?
+
+a.  HTML
+b.  Pandoc attribute syntax
+c.  YAML
+d.  CSS
+e.  R
+:::
+
+## Generalizing the Code Chunk {auto-animate="true"}
+
+How can this be generalized to other languages?
+
+::: columns
+::: {.column width="50%"}
+```{{{r, echo=FALSE}}}
+rnorm(3)
+```
+:::
+
+::: {.column width="50%"}
+:::
+:::
+
+## Generalizing the Code Chunk {auto-animate="true"}
+
+How can this be generalized to other languages?
+
+::: columns
+::: {.column width="50%"}
+```{{{language, echo=FALSE}}}
+code
+```
+:::
+
+::: {.column width="50%"}
+-   Executable code flagged by `{}`
+-   Support R, Python, Julia
+-   Also support `mermaid` and `dot` diagram languages.
+:::
+:::
+
+## Generalizing the Code Chunk {auto-animate="true"}
+
+How can this be generalized to other languages?
+
+::: columns
+::: {.column width="50%"}
+```{{{language}}}
+#| echo: false
+
+code
+```
+:::
+
+::: {.column width="50%"}
+-   Executable code flagged by `{}`
+-   Support R, Python, Julia
+-   Also support `mermaid` and `dot` diagram languages[^1]
+-   Cell options live inside the cell after `#|` (the hash pipe!)[^2]
+
+::: fragment
+**This is a Quarto Code Cell.**
+:::
+:::
+:::
+
+[^1]: See <https://quarto.org/docs/authoring/diagrams.html>.
+
+[^2]: The hash pipe is available in the R Markdown too.
+
+## The Perks of the Hashpipe `#|`
+
+::: {.fragment style="margin-left: 20px; white-space: nowrap"}
+1.  Line breaks prevent chunk options that go on `{r, and=on, and=on, and=on, and=on, and=on, and=on}`{style="white-space: nowrap"}
+:::
+
+::: {.fragment style="margin-left: 20px"}
+2.  Chunk options are now pan-language with `<commentchar>|`.
+
+::: columns
+::: {.column width="50%"}
+```` markdown
+```{{python}}
+#| echo: false
+```
+````
+:::
+
+::: {.column width="50%"}
+```` markdown
+```{{mermaid}}
+%%| echo: false
+```
+````
+:::
+:::
+:::
+
+::: {.fragment style="margin-left: 20px; white-space: nowrap"}
+3.  No more yelling! (`eval=FALSE`)
+:::
+
+## Execution Options
+
+Control how the code is executed with options.
+
+::: {style="font-size: .8em"}
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Option      | Description                                                                                                                                                                                       |
++=============+===================================================================================================================================================================================================+
+| `eval`      | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                                                                        |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `echo`      | Include the source code in output                                                                                                                                                                 |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `output`    | Include the results of executing the code in the output (`true`, `false`, or `asis` to indicate that the output is raw markdown and should not have any of Quarto's standard enclosing markdown). |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `warning`   | Include warnings in the output.                                                                                                                                                                   |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `error`     | Include errors in the output.                                                                                                                                                                     |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `include`   | Catch all for preventing any output (code or results) from being included (e.g. `include: false` suppresses all output from the code block).                                                      |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+:::
+
+##  {menu-title="YAML Intelligence"}
+
+\
+\
+
+[Don't forget to use cmd-space to see the available options!]{style="align: center"}
+
+![](images/code-yaml-intelligence.png){width="100px"}
+
+## From Cell Option to YAML {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` {.markdown code-line-numbers="7"}
+---
+title: My Doc
+format: html
+---
+
+```{{r}}
+#| echo: true
+
+pi + 1
+```
+````
+:::
+:::
+
+## From Cell Option to YAML {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` {.markdown code-line-numbers="4,5"}
+---
+title: My Doc
+format: html
+execute:
+  echo: true
+---
+
+```{{r}}
+pi + 1
+```
+````
+:::
+
+::: {.column width="50%"}
+-   Options can be moved into YAML under the `execute` key to apply to all chunks. Exceptions to that option can be set cell-by-cell.
+:::
+:::
+
+## From Cell Option to YAML {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` {.markdown code-line-numbers="6-8"}
+---
+title: My Doc
+format: html
+execute:
+  echo: true
+knitr:
+  opts_chunk: 
+    collapse: true
+---
+
+```{{r}}
+pi + 1
+```
+````
+:::
+
+::: {.column width="50%"}
+-   Options can be moved into YAML under the `execute` key to apply to all chunks. Exceptions to that option can be set cell-by-cell.
+
+-   You can also pass options via YAML to knitr through the `knitr` key[^3].
+:::
+:::
+
+[^3]: No more \`\`\``{r setup}`!
+
+## From Cell Option to YAML {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` {.markdown code-line-numbers="9-10"}
+---
+title: My Doc
+format: html
+execute:
+  echo: true
+knitr:
+  opts_chunk: 
+    collapse: true
+    R.options:
+      digits: 2
+---
+
+```{{r}}
+pi + 1
+```
+````
+:::
+
+::: {.column width="50%"}
+-   Options can be moved into YAML under the `execute` key to apply to all chunks. Exceptions to that option can be set cell-by-cell.
+
+-   You can also pass options via YAML to knitr through the `knitr` key[^4].
+
+-   You can use knitr to pass options that control your R session.
+:::
+:::
+
+[^4]: No more \`\`\``{r setup}` :tada:
+
+## Example: Figures from Code {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` markdown
+```{{r}}
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point()
+```
+````
+:::
+
+::: {.column .fragment width="50%"}
+```{r}
+#| echo: false
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point() +
+  theme_grey(base_size = 18)
+```
+:::
+:::
+
+## Example: Figures from Code {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` markdown
+```{{r}}
+#| fig-width: 5
+#| fig-height: 3
+
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point()
+```
+````
+:::
+
+::: {.column .fragment width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 3
+#| 
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point() +
+  theme_grey(base_size = 18)
+```
+:::
+:::
+
+## Example: Figures from Code {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+```` markdown
+```{{r}}
+#| fig-width: 5
+#| fig-height: 3
+#| fig-cap: Size of penguins on three islands in the Palmer Archipelago.
+#| fig-alt: Scatterplot showing the bill sizes of penguins across three islands.
+
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point()
+```
+````
+:::
+
+::: {.column .fragment width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 3
+#| fig-cap: "Size of penguins on three islands in the Palmer Archipelago."
+#| fig-alt: "Scatterplot showing the bill sizes of penguins across three islands."
+
+
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     col = island)) +
+  geom_point() +
+  theme_grey(base_size = 18)
+```
+:::
+:::
+
+. . .
+
+> Save time/code by moving figure sizing defaults up to the YAML.
+
+## Optional: Your turn (over the break) {.smaller}
+
+::: task
+-   Open `code-cells.qmd` and render the document.
+-   Add `echo: false` to the code cell and re-render.
+-   Add more cell options by using Ctrl + Space after the `#|` or consult the [Quarto Reference](https://quarto.org/docs/reference/cells/cells-knitr.html).
+-   Add a second code cell (you can copy + paste the first), move your cell options to the YAML, and re-render.
+:::
+
+```{r}
+#| echo: false
+
+countdown(minutes = 5)
+```

@@ -1,0 +1,24 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
+
+$font-family: "Atkinson Hyperlegible", sans-serif;
+
+$primary-color: #581B39;
+$secondary-color: #CC8147;
+$link-color: $secondary-color;
+$hover-color: lighten($link-color, 10%);
+$sidebar-bg: $primary-color;
+
+/*-- scss:rules --*/
+
+a{
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover{
+    color: $hover-color;
+    border-bottom: 1px solid $hover-color;
+  }
+
+}

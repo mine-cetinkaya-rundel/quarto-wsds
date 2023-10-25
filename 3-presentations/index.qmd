@@ -1,0 +1,15 @@
+---
+title: "Presentations"
+---
+
+## Slides
+
+[View slides in full screen](3-presentations.qmd)
+
+```{=html}
+<iframe class="slide-deck" src="3-presentations.html" height="420" width="747" style="border: 1px solid #581B39;"></iframe>
+```
+
+## Exercises
+
+- `hello-penguins-slides.qmd`

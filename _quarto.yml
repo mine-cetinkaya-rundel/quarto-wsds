@@ -1,0 +1,56 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  title: "Hello Quarto - A World of Possibilities (for Reproducible Publishing)"
+  description: "WSDS 2023 Short Course"
+  repo-url: https://github.com/mine-cetinkaya-rundel/quarto-wsds
+  page-footer:
+    background: "#581B39"
+    left: "&copy; Copyright 2023, Mine Çetinkaya-Rundel"
+    center:
+      - icon: github
+        href: https://github.com/mine-cetinkaya-rundel/quarto-wsds
+    right: "This page is built with 🧡 and [Quarto](https://quarto.org/)."
+  open-graph: true
+  sidebar:
+    logo: "images/logo.png"
+    pinned: true
+    align: center
+    style: docked
+    search: true
+    collapse-level: 2
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: pre-work.qmd
+        text: Pre-work
+      - section: "Modules"
+        contents:
+          - href: 1-hello-quarto/index.qmd
+            text: Hello Quarto
+          - href: 2-documents/index.qmd
+            text: Documents
+          - href: 3-presentations/index.qmd
+            text: Presentations
+          - href: 4-websites/index.qmd
+            text: Websites
+          - href: 5-articles/index.qmd
+            text: Articles
+          - href: 6-wrap-up/index.qmd
+            text: Wrap-up
+
+format:
+  html:
+    theme: 
+      light: style/wsds-light.scss
+      dark: style/wsds-dark.scss
+    code-copy: true
+    code-overflow: wrap
+    mainfont: "Atkinson Hyperlegible"
+    toc: true
+
+execute:
+  freeze: auto
+  echo: true

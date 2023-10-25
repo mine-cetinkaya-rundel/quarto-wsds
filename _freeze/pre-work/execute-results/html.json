@@ -1,0 +1,15 @@
+{
+  "hash": "9f9935cc7a77ce30bad8aff288204dad",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Pre-workshop instructions\"\n---\n\n\nPlease make sure to bring a laptop with you to the workshop and complete the following steps:\n\n## Software\n\nDownload and install the latest versions of R, RStudio, and Quarto:\n\n-   R 4.2.3 or above: https://cran.r-project.org\n\n-   RStudio 2023.09.1+494 or above: https://posit.co/download/rstudio-desktop\n\n-   Quarto 1.3.450: https://quarto.org/docs/get-started\n\n## R Packages \n\nInstall the following packages:\n\n\n::: {.cell}\n\n```{.r .cell-code}\npkg_list <- c(\"tidyverse\", \"gt\", \"ggthemes\", \"palmerpenguins\", \"quarto\", \"here\", \"usethis\")\ninstall.packages(pkg_list)\n```\n:::\n\n\n## Exercises\n\nDownload and open the exercises for this session. The easiest way is to run this line of R code at the console in RStudio.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nusethis::use_course(\"https://bit.ly/wsds-exercises\")\n```\n:::\n\n\nIf that doesn't work, you can download a zip file of the exercises [here](https://github.com/mine-cetinkaya-rundel/quarto-wsds-exercises), then open the directory. The qmd files can be opened in RStudio.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

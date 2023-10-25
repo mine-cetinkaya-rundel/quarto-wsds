@@ -1,0 +1,19 @@
+---
+title: "Documents"
+---
+
+## Slides
+
+[View slides in full screen](2-documents.html)
+
+```{=html}
+<iframe class="slide-deck" src="2-documents.html" height="420" width="747" style="border: 1px solid #581B39;"></iframe>
+```
+
+## Exercises
+
+- `hello-penguins.qmd`
+- `markdown-syntax.qmd`
+- `tables-figures.qmd`
+- `callout-boxes.qmd`
+- `code-cells.qmd`

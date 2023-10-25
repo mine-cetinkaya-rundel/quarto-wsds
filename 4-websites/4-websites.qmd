@@ -1,0 +1,236 @@
+---
+title: "Websites"
+subtitle: "Hello Quarto - A World of Possibilities<br>(for Reproducible Publishing)"
+footer: "[mine.quarto.pub/quarto-wsds](https://mine.quarto.pub/quarto-wsds)"
+format:
+  revealjs:
+    author: "Mine Çetinkaya Rundel"
+    institute: "Duke University + Posit"
+    transition: fade
+    slide-number: true
+    chalkboard: false
+    logo: "../images/logo.png"
+    theme: ../style/slides.scss
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# set width of code output
+options(width = 65)
+
+# load background packages
+library(countdown)
+```
+
+# Anatomy of a Quarto project
+
+## What defines a Quarto Project?
+
+::: r-fit-text
+> [A Quarto Project is a directory]{.fragment} [that contains a file called `_quarto.yml`.]{.fragment}
+:::
+
+\
+
+::: columns
+::: {.column .fragment .fade-right width="50%"}
+This is a Quarto Project.
+
+![](images/quarto-project.png){.drop fig-alt="Files panel in RStudio showing my-doc.qmd and _quarto.yml."}
+:::
+
+::: {.column .fragment .fade-left width="50%"}
+This is not.
+
+![](images/not-quarto-project.png){.drop fig-alt="Files panel in RStudio showing only my-doc.qmd."}
+:::
+:::
+
+## \_quarto.yml {auto-animate="true"}
+
+A YAML file with particular keys and values that Quarto recognizes. Unrecognized keys are ignored.
+
+``` {.yaml .fragment filename="_quarto.yml"}
+project:
+  title: "A Barebones Project"
+```
+
+## Quarto Project vs RStudio Project
+
+::: columns
+::: {.column .incremental .smaller width="50%"}
+-   Quarto Projects determine how `quarto render`, `quarto preview` and `quarto publish` work when run inside the directory.
+-   RStudio Projects store configuration info for the IDE when working from the directory.
+-   A directory can have one or both!
+:::
+
+::: {.column .fragment .fade-left width="50%"}
+\
+
+![](images/quarto-rstudio-project.png){.drop fig-alt="Files panel in RStudio showing my-doc.qmd, _quarto.yml, and an .Rproj file."}
+:::
+:::
+
+## Quarto projects
+
+-   Quarto projects have a `_quarto.yml` file
+
+-   The `type` field in this file indicates the type of project:
+
+    -   `default`: Collection of documents
+
+    -   `website`: Websites (and blogs)
+
+    -   `book`: Books
+
+    -   `manuscript`: Manuscripts (Quarto 1.4+)
+
+## Quarto websites
+
+-   Websites are essentially `format: html` + a Quarto Project file
+
+-   But a website is different than `format: html` in that it has multiple pages
+
+-   Websites are our first exploration into Quarto Projects
+
+-   Websites and books are very similar in that they associate multiple pages/resources into a connected resource
+
+## Our turn
+
+::: task
+Let's build a website together from all of the documents we've created so far and highlight the following features of Quarto websites:
+
+-   `_quarto.yml`
+
+-   `index.qmd` / landing page
+
+-   Navigation
+
+-   Freeze
+
+-   Publishing to QuartoPub
+
+-   An aspect of the workshop webpage that you fancy?
+:::
+
+# Computations
+
+## When should code be re-run? {.smaller}
+
+::: incremental
+-   You might have a reason to re-run all code in a Quarto website (every single chunk in every single document) every time you render the website.
+
+-   But, chances are, that's not what you want.
+
+    -   Just playing around styling -- you probably don't want to run the code again
+
+    -   Changed some code in a document -- you probably want to re-run the code in that document, but not necessarily others
+
+    -   Made a big change affecting computations on many or all pages -- you probably want to re-run all code
+
+-   `freeze` and `cache` options give you fine control over these decisions
+:::
+
+## Freeze {.smaller}
+
+-   The `freeze` option controls when/if computational documents be re-rendered during a global project render:
+
+``` yaml
+execute:
+  freeze: true  # never re-render during project render
+```
+
+``` yaml
+execute:
+  freeze: auto  # re-render only when source changes
+```
+
+``` yaml
+execute:
+  freeze: false  # always re-render
+```
+
+-   The `freeze` option is typically added to a `_metadata.yml` file within a specific directory, affecting all files in that directory.
+
+-   For blogs, set `feeze` in `_metadata.yml` at the root of the `posts` directory.
+
+-   You can have it only within specific subdirectories for more complex sites.
+
+## Cache
+
+-   Cache stores the results of computations for a specific file.
+
+-   Cache invalidation is triggered by changes in chunk source code (or other cache attributes you've defined).
+
+-   `cache` can also be set at the chunk level. Consider using the cache for computationally expensive chunks.
+
+## Freeze vs. cache {.smaller}
+
+-   Freeze option is typically set
+
+    -   for the whole website in `_quarto.yml`, or
+
+    -   for files within a directory in `_metadata.yml` in that directory
+
+``` yaml
+execute: 
+  freeze: auto
+```
+
+-   Cache option is typically set for a given file or for individual chunk(s) in a file.
+
+``` yaml
+execute:
+  cache: true
+```
+
+or
+
+```{r}
+#| echo: fenced
+#| cache: true
+
+1 + 1
+```
+
+# Publishing
+
+## QuartoPub
+
+-   [Quarto Pub](https://quartopub.com/) is a free publishing service for content created with Quarto. It is ideal for blogs, course or project websites, books, presentations, and personal hobby sites.
+
+-   Publish with `quarto publish`:
+
+``` {.bash filename="Terminal"}
+quarto publish quarto-pub
+```
+
+-   Gain a `_publish.yml` that is safe to check into version control.
+
+## Other venues
+
+-   GitHub Pages
+-   Posit Connect
+-   Netlify
+-   Confluence
+-   [More venues](https://quarto.org/docs/publishing/other.html)
+
+# Wrap up
+
+## Learn more
+
+::: learn-more
+[quarto.org/docs/websites](https://quarto.org/docs/websites/)
+
+```{=html}
+<iframe src="https://quarto.org/docs/websites" width="100%" height="500" style="border:2px solid #123233;" title="Quarto Journal Articles"></iframe>
+```
+:::
+
+## Questions
+
+::: task
+Any questions / anything you'd like to review before we wrap up this module?
+:::

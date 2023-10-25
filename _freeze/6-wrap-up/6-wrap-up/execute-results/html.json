@@ -1,0 +1,19 @@
+{
+  "hash": "cd2f3abf00f26b2e0bc992c967f4cb20",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Wrap-up\"\nsubtitle: \"Hello Quarto - A World of Possibilities<br>(for Reproducible Publishing)\"\nfooter: \"[mine.quarto.pub/quarto-wsds](https://mine.quarto.pub/quarto-wsds)\"\nformat:\n  revealjs:\n    author: \"Mine Çetinkaya Rundel\"\n    institute: \"Duke University + Posit\"\n    transition: fade\n    slide-number: true\n    chalkboard: false\n    logo: \"../images/logo.png\"\n    theme: ../style/slides.scss\n---\n\n\n\n\n# Parting remarks\n\n## Quarto CLI...\n\norchestrates each step of rendering\n\n![Artwork from \"Hello, Quarto\" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst.](images/horst_qmd_render_schema.png){fig-alt=\"A schematic representing rendering of Quarto documents from .qmd, to knitr or jupyter, to plain text markdown, then converted by pandoc into any number of output types including html, PDF, or Word document.\"}\n\n## Learn more\n\n::: learn-more\n[https://quarto.org](https://quarto.org/)\n\n\n```{=html}\n<iframe src=\"https://quarto.org/\" width=\"100%\" height=\"550\" title=\"Quarto Website\"></iframe>\n```\n\n:::\n\n## Follow up with...\n\n::: learn-more\n[quarto.org/docs/blog](https://quarto.org/docs/blog)\n\n\n```{=html}\n<iframe src=\"https://quarto.org/docs/blog/\" width=\"100%\" height=\"550\" title=\"Quarto Website\"></iframe>\n```\n\n:::\n\n# Troubleshooting\n\n## Creating a minimum reproducible example\n\n-   For any coding question, start by creating a minimum reproducible example (reprex)\n\n-   You'll find that this task is less than trivial for a complex Quarto project\n\n-   But there's a good chance you'll solve your problem while creating the reprex\n\n## Getting help\n\n-   Review the FAQ: <https://quarto.org/docs/faq>\n\n-   Have a question, post on GitHub Discussion: <https://github.com/quarto-dev/quarto-cli/discussions>\n\n-   Found (or think you found) a bug or have a feature request, open an issue: <https://github.com/quarto-dev/quarto-cli/issues>\n\n# Fin\n\n## Thank you! {background-image=\"images/thank-you.png\"}\n\n🐘 [https://fosstodon.org/\\@minecr](https://fosstodon.org/@minecr)\n\n🐦 [\\@minebocek](https://twitter.com/minebocek)\n\n## Questions\n\n::: task\nAny questions / anything you'd like to review or learn before we wrap up the workshop?\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

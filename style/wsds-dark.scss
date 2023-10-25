@@ -1,0 +1,39 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
+
+$font-family: "Atkinson Hyperlegible", sans-serif;
+
+// Base document colors
+$body-bg: #181818;
+$body-color: white;
+$link-color: #eaccb5;
+$hover-color: lighten($link-color, 10%);
+$light: #525252;
+
+// Navigation element colors
+$footer-bg: #181818;
+$navbar-bg: #303030;
+$sidebar-bg: #303030;
+
+// Code blocks
+$code-block-bg-alpha: -.8;
+
+// Bootstrap popovers
+$popover-bg: #242424;
+
+// Bootstrap inputs
+$input-bg: #242424;
+
+/*-- scss:rules --*/
+
+a{
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover{
+    color: $hover-color;
+    border-bottom: 1px solid $hover-color;
+  }
+
+}
