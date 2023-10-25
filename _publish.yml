@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 13013039-7ee7-4818-9822-9e1428337c53
+      url: 'https://mine.quarto.pub/quarto-wsds'
