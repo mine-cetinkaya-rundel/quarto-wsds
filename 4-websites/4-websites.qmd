@@ -9,7 +9,7 @@ format:
     transition: fade
     slide-number: true
     chalkboard: false
-    logo: "../images/logo.png"
+    logo: "../images/logo-slides.png"
     theme: ../style/slides.scss
 ---
 
